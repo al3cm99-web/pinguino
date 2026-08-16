@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Una sorpresa per te 🐧🌹</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <title>Una lettera per te 💌</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
+
 
 <body>
 
+
     <main class="scene">
+
+
+        <!-- =========================
+             VIDEO DEL PINGUINO
+        ========================== -->
 
         <video
             id="penguinVideo"
@@ -20,22 +35,50 @@
             playsinline
             preload="auto"
         >
-            <source src="pinguino.mp4" type="video/mp4">
+
+            <source
+                src="pinguino.mp4"
+                type="video/mp4"
+            >
+
         </video>
 
-        <button
-            id="heartButton"
-            type="button"
-            aria-label="Premi il cuore"
-        >
-            ❤️
+
+
+        <!-- =========================
+             PULSANTE APRI LETTERA
+        ========================== -->
+
+        <button id="openLetter">
+
+            💌 Apri la lettera
+
         </button>
 
-        <div id="heartContainer"></div>
+
+
+        <!-- =========================
+             SCHERMATA LETTERA
+        ========================== -->
+
+        <div id="letterScreen">
+
+            <img
+                src="lettera.png"
+                alt="Lettera"
+                id="letterImage"
+            >
+
+        </div>
+
 
     </main>
 
+
+
     <script src="script.js"></script>
 
+
 </body>
+
 </html>
