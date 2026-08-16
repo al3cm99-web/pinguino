@@ -13,13 +13,12 @@ body {
 body {
     background: black;
     overflow: hidden;
-    font-family: Arial, sans-serif;
 }
 
 
-/* ==============================
+/* =========================
    SCENA
-============================== */
+========================= */
 
 .scene {
     position: relative;
@@ -33,18 +32,18 @@ body {
 }
 
 
-/* ==============================
+/* =========================
    VIDEO
-============================== */
+========================= */
 
 #penguinVideo {
     position: absolute;
 
-    width: 100%;
-    height: 100%;
-
     top: 0;
     left: 0;
+
+    width: 100%;
+    height: 100%;
 
     object-fit: cover;
 
@@ -52,9 +51,9 @@ body {
 }
 
 
-/* ==============================
+/* =========================
    CUORE CENTRALE
-============================== */
+========================= */
 
 #heartButton {
     position: absolute;
@@ -67,11 +66,9 @@ body {
         scale(0);
 
     border: none;
-    outline: none;
-
     background: transparent;
 
-    font-size: clamp(80px, 18vw, 150px);
+    font-size: clamp(90px, 18vw, 150px);
 
     cursor: pointer;
 
@@ -79,18 +76,11 @@ body {
 
     z-index: 20;
 
-    filter:
-        drop-shadow(
-            0 0 25px rgba(255, 0, 70, 0.9)
-        );
-
     transition:
         opacity 0.5s ease,
         transform 0.5s ease;
 }
 
-
-/* CUORE VISIBILE */
 
 #heartButton.show {
     opacity: 1;
@@ -103,8 +93,6 @@ body {
 }
 
 
-/* BATTITO */
-
 @keyframes heartbeat {
 
     0%,
@@ -114,79 +102,72 @@ body {
             scale(1);
     }
 
-    25% {
-        transform:
-            translate(-50%, -50%)
-            scale(1.15);
-    }
-
     50% {
         transform:
             translate(-50%, -50%)
-            scale(1);
+            scale(1.18);
     }
-
-    75% {
-        transform:
-            translate(-50%, -50%)
-            scale(1.1);
-    }
-
 }
 
 
-/* ==============================
-   CONTENITORE CUORI
-============================== */
+/* =========================
+   CONTENITORE DEI CUORI
+========================= */
 
 #heartContainer {
-    position: fixed;
+    position: absolute;
 
     top: 0;
     left: 0;
 
-    width: 100vw;
-    height: 100vh;
-
-    pointer-events: none;
+    width: 100%;
+    height: 100%;
 
     overflow: hidden;
 
-    z-index: 50;
+    pointer-events: none;
+
+    z-index: 30;
 }
 
 
-/* ==============================
-   CUORI CHE CADONO
-============================== */
+/* =========================
+   CUORE CHE CADE
+========================= */
 
 .falling-heart {
     position: absolute;
 
-    top: -120px;
+    top: -100px;
 
     user-select: none;
 
     pointer-events: none;
 
-    animation-name: fall;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
+    line-height: 1;
 
-    filter:
-        drop-shadow(
-            0 3px 5px rgba(0, 0, 0, 0.25)
-        );
+    /*
+       IMPORTANTISSIMO:
+       forwards mantiene il cuore
+       nella posizione finale.
+    */
+
+    animation:
+        fall var(--duration)
+        cubic-bezier(.25, .7, .35, 1)
+        forwards;
 }
 
 
-/* CADUTA */
+/* =========================
+   CADUTA
+========================= */
 
 @keyframes fall {
 
     0% {
         transform:
-            translateY(-100px)
+            translateY(0)
             rotate(0deg);
 
         opacity: 1;
@@ -194,8 +175,8 @@ body {
 
     100% {
         transform:
-            translateY(120vh)
-            rotate(360deg);
+            translateY(var(--fall-distance))
+            rotate(var(--rotation));
 
         opacity: 1;
     }
