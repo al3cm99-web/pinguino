@@ -11,31 +11,33 @@ const heartContainer =
 let rainStarted = false;
 
 
-/* ==============================
-   FINE VIDEO
-============================== */
+/*
+=================================
+FINE DEL VIDEO
+=================================
+*/
 
 video.addEventListener("ended", () => {
 
     /*
-        Riportiamo il video praticamente
-        sull'ultimo frame.
-
-        Serve perché alcuni browser,
-        alla fine del video,
-        potrebbero mostrare uno sfondo nero.
+        Manteniamo praticamente
+        l'ultimo fotogramma del video.
     */
 
     if (video.duration) {
 
         video.currentTime =
-            Math.max(0, video.duration - 0.05);
+            Math.max(
+                0,
+                video.duration - 0.05
+            );
 
     }
 
 
     /*
-        Mostriamo il cuore centrale.
+        Facciamo comparire
+        il cuore centrale.
     */
 
     heartButton.classList.add("show");
@@ -43,19 +45,18 @@ video.addEventListener("ended", () => {
 });
 
 
-/* ==============================
-   CLICK CUORE
-============================== */
+/*
+=================================
+CLICK SUL CUORE CENTRALE
+=================================
+*/
 
 heartButton.addEventListener("click", () => {
-
-    /*
-        Evitiamo più avvii contemporanei.
-    */
 
     if (rainStarted) {
         return;
     }
+
 
     rainStarted = true;
 
@@ -68,7 +69,7 @@ heartButton.addEventListener("click", () => {
 
 
     /*
-        Avviamo la pioggia.
+        Parte la cascata.
     */
 
     startHeartRain();
@@ -76,11 +77,13 @@ heartButton.addEventListener("click", () => {
 });
 
 
-/* ==============================
-   CREA UN CUORE
-============================== */
+/*
+=================================
+CREAZIONE DI UN CUORE
+=================================
+*/
 
-function createHeart() {
+function createHeart(pileHeight) {
 
     const heart =
         document.createElement("div");
@@ -90,36 +93,10 @@ function createHeart() {
 
 
     /*
-        Tipologie diverse di cuore.
+        SOLO CUORE ROSSO.
     */
 
-    const hearts = [
-        "❤️",
-        "💖",
-        "💕",
-        "💗",
-        "💓",
-        "💞"
-    ];
-
-
-    const randomHeart =
-        hearts[
-            Math.floor(
-                Math.random() * hearts.length
-            )
-        ];
-
-
-    heart.textContent = randomHeart;
-
-
-    /*
-        Posizione orizzontale casuale.
-    */
-
-    heart.style.left =
-        Math.random() * 100 + "vw";
+    heart.textContent = "❤️";
 
 
     /*
@@ -127,105 +104,225 @@ function createHeart() {
     */
 
     const size =
-        Math.random() * 45 + 25;
+        Math.random() * 35 + 35;
+
 
     heart.style.fontSize =
         size + "px";
 
 
     /*
-        Velocità casuale.
-
-        Alcuni cadono più velocemente,
-        altri più lentamente.
+        Posizione casuale
+        da sinistra a destra.
     */
 
-    const duration =
-        Math.random() * 2 + 2;
+    const maxLeft =
+        window.innerWidth - size;
 
-    heart.style.animationDuration =
-        duration + "s";
+
+    heart.style.left =
+        Math.random() * maxLeft + "px";
 
 
     /*
-        Piccolo ritardo casuale.
+        Il cuore si ferma in un punto
+        casuale dentro la parte
+        già riempita dello schermo.
     */
 
-    heart.style.animationDelay =
-        Math.random() * 0.3 + "s";
+    const randomPilePosition =
+        Math.random() * pileHeight;
 
+
+    let finalY =
+        window.innerHeight
+        - randomPilePosition
+        - size;
+
+
+    /*
+        Evitiamo che salga oltre
+        la parte superiore.
+    */
+
+    if (finalY < 0) {
+        finalY = Math.random() * 20;
+    }
+
+
+    /*
+        Distanza percorsa partendo
+        da sopra lo schermo.
+    */
+
+    heart.style.setProperty(
+        "--fall-distance",
+        (finalY + 100) + "px"
+    );
+
+
+    /*
+        Velocità casuale.
+    */
+
+    const duration =
+        Math.random() * 1.2 + 1.5;
+
+
+    heart.style.setProperty(
+        "--duration",
+        duration + "s"
+    );
+
+
+    /*
+        Rotazione casuale.
+    */
+
+    const rotation =
+        Math.random() * 180 - 90;
+
+
+    heart.style.setProperty(
+        "--rotation",
+        rotation + "deg"
+    );
+
+
+    /*
+        Inseriamo il cuore.
+
+        NON viene mai eliminato.
+    */
 
     heartContainer.appendChild(heart);
 
 }
 
 
-/* ==============================
-   PIOGGIA DI CUORI
-============================== */
+/*
+=================================
+CASCATA + ACCUMULO
+=================================
+*/
 
 function startHeartRain() {
 
     /*
-        FASE 1
-
-        All'inizio pochi cuori.
+        Altezza iniziale
+        dell'accumulo.
     */
 
-    let heartsPerWave = 3;
+    let pileHeight = 70;
 
-    let intervalTime = 250;
 
+    /*
+        Creiamo una nuova ondata
+        ogni 120 millisecondi.
+    */
 
     const rain =
         setInterval(() => {
 
+
+            /*
+                Ogni ondata crea
+                12 cuori.
+            */
+
             for (
                 let i = 0;
-                i < heartsPerWave;
+                i < 12;
                 i++
             ) {
 
-                createHeart();
+                createHeart(pileHeight);
 
             }
 
-        }, intervalTime);
+
+            /*
+                L'accumulo sale
+                progressivamente.
+            */
+
+            pileHeight += 22;
 
 
-    /*
-        Dopo 2 secondi
-        aumentiamo la quantità.
-    */
+            /*
+                Quando abbiamo raggiunto
+                tutta l'altezza dello schermo...
+            */
 
-    setTimeout(() => {
+            if (
+                pileHeight >=
+                window.innerHeight + 100
+            ) {
 
-        heartsPerWave = 7;
-
-    }, 2000);
-
-
-    /*
-        Dopo 4 secondi
-        diventano tantissimi.
-    */
-
-    setTimeout(() => {
-
-        heartsPerWave = 15;
-
-    }, 4000);
+                clearInterval(rain);
 
 
-    /*
-        Dopo 6 secondi
-        vera valanga di cuori.
-    */
+                /*
+                    Ultima ondata molto intensa
+                    per coprire eventuali spazi.
+                */
 
-    setTimeout(() => {
+                finalHeartExplosion();
 
-        heartsPerWave = 25;
+            }
 
-    }, 6000);
+
+        }, 120);
+
+}
+
+
+/*
+=================================
+RIEMPIMENTO FINALE
+=================================
+*/
+
+function finalHeartExplosion() {
+
+    let waves = 0;
+
+
+    const finalRain =
+        setInterval(() => {
+
+
+            for (
+                let i = 0;
+                i < 20;
+                i++
+            ) {
+
+                createHeart(
+                    window.innerHeight + 100
+                );
+
+            }
+
+
+            waves++;
+
+
+            /*
+                Dopo alcune ondate
+                fermiamo la generazione.
+
+                Tutti i cuori già creati
+                restano sullo schermo.
+            */
+
+            if (waves >= 12) {
+
+                clearInterval(finalRain);
+
+            }
+
+
+        }, 100);
 
 }
