@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Una sorpresa per te 🐧🌹</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="scene">
+
+        <video
+            id="penguinVideo"
+            autoplay
+            muted
+            playsinline
+            preload="auto"
+        >
+            <source src="pinguino.mp4" type="video/mp4">
+        </video>
+
+        <button
+            id="heartButton"
+            type="button"
+            aria-label="Premi il cuore"
+        >
+            ❤️
+        </button>
+
+        <div id="heartContainer"></div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
