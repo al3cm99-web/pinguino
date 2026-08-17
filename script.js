@@ -1,81 +1,100 @@
+const screens =
+    document.querySelectorAll(".screen");
+
 const video =
-    document.getElementById("penguinVideo");
+    document.getElementById("wandaVideo");
+
+const introText =
+    document.getElementById("introText");
+
+const talkButton =
+    document.getElementById("talkButton");
+
+const nextButtons =
+    document.querySelectorAll(".nextButton");
 
 
-const openLetterButton =
-    document.getElementById("openLetter");
+let currentScreen = 0;
 
 
-const letterScreen =
-    document.getElementById("letterScreen");
+/* CAMBIO SCHERMATA */
+
+function showScreen(index) {
+
+    screens.forEach(screen => {
+
+        screen.classList.remove("active");
+
+    });
 
 
-
-/* =========================
-   FINE VIDEO
-========================= */
-
-video.addEventListener(
-    "ended",
-    () => {
+    screens[index]
+        .classList
+        .add("active");
 
 
-        /*
-        Torniamo leggermente indietro
-        per mantenere visibile
-        l'ultimo fotogramma.
-        */
+    currentScreen = index;
 
-        if (video.duration) {
+}
 
-            video.currentTime =
-                Math.max(
-                    0,
-                    video.duration - 0.05
-                );
+
+/* FINE VIDEO */
+
+video.addEventListener("ended", () => {
+
+    if (video.duration) {
+
+        video.currentTime =
+            Math.max(
+                0,
+                video.duration - 0.05
+            );
+
+    }
+
+
+    introText
+        .classList
+        .add("show");
+
+
+    setTimeout(() => {
+
+        talkButton
+            .classList
+            .add("show");
+
+    }, 2000);
+
+});
+
+
+/* PARLA CON MISTER WANDA */
+
+talkButton.addEventListener("click", () => {
+
+    showScreen(1);
+
+});
+
+
+/* FRECCE */
+
+nextButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        if (
+            currentScreen <
+            screens.length - 1
+        ) {
+
+            showScreen(
+                currentScreen + 1
+            );
 
         }
 
+    });
 
-        /*
-        Mostriamo il pulsante
-        */
-
-        openLetterButton
-            .classList
-            .add("show");
-
-    }
-);
-
-
-
-/* =========================
-   CLICK APRI LETTERA
-========================= */
-
-openLetterButton.addEventListener(
-    "click",
-    () => {
-
-
-        /*
-        Nascondiamo il pulsante
-        */
-
-        openLetterButton
-            .classList
-            .remove("show");
-
-
-        /*
-        Mostriamo la schermata
-        della lettera
-        */
-
-        letterScreen
-            .classList
-            .add("show");
-
-    }
-);
+});

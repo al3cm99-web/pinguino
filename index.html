@@ -1,84 +1,234 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Mister Wanda 🐶</title>
 
-    <title>Una lettera per te 💌</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
+<main id="app">
 
-    <main class="scene">
+    <!-- STEP 1 - VIDEO -->
 
-
-        <!-- =========================
-             VIDEO DEL PINGUINO
-        ========================== -->
+    <section class="screen active">
 
         <video
-            id="penguinVideo"
+            id="wandaVideo"
             autoplay
             muted
             playsinline
             preload="auto"
         >
-
-            <source
-                src="pinguino.mp4"
-                type="video/mp4"
-            >
-
+            <source src="wanda.mp4" type="video/mp4">
         </video>
 
+        <div id="introOverlay">
 
+            <h1 id="introText">
+                Finalmente ti ho trovata 🥹
+            </h1>
 
-        <!-- =========================
-             PULSANTE APRI LETTERA
-        ========================== -->
-
-        <button id="openLetter">
-
-            💌 Apri la lettera
-
-        </button>
-
-
-
-        <!-- =========================
-             SCHERMATA LETTERA
-        ========================== -->
-
-        <div id="letterScreen">
-
-            <img
-                src="lettera.png"
-                alt="Lettera"
-                id="letterImage"
-            >
+            <button id="talkButton">
+                Parla con Mister Wanda
+            </button>
 
         </div>
 
-
-    </main>
-
+    </section>
 
 
-    <script src="script.js"></script>
+    <!-- STEP 2 -->
 
+    <section class="screen photo-screen">
+
+        <img src="wanda-importante.jpg" alt="Wanda">
+
+        <div class="text-box">
+            Ho qualcosa di importante da dirti…
+        </div>
+
+        <button class="nextButton">→</button>
+
+    </section>
+
+
+    <!-- STEP 3 -->
+
+    <section class="screen photo-screen">
+
+        <img src="wanda-cuscino.jpg" alt="Wanda che dorme">
+
+        <div class="text-box">
+            Ho capito che mancava qualcosa…<br><br>
+
+            Quando dormivo, non avevo te come cuscino.<br><br>
+
+            E con la mia intelligenza… ho capito tutto.
+        </div>
+
+        <button class="nextButton">→</button>
+
+    </section>
+
+
+    <!-- STEP 4 -->
+
+    <section class="screen photo-screen">
+
+        <img src="wanda-ti-guarda.jpg" alt="Wanda">
+
+        <div class="text-box">
+            È vero…<br><br>
+
+            Il mio padrone a volte sa essere un po’ scemo…<br><br>
+
+            e anche parecchio insopportabile.
+        </div>
+
+        <button class="nextButton">→</button>
+
+    </section>
+
+
+    <!-- STEP 5 -->
+
+    <section class="screen photo-screen">
+
+        <img src="wanda-auto-queen.jpg" alt="Wanda in macchina">
+
+        <div class="text-box">
+            Anche a me non fa scegliere la musica in macchina…<br><br>
+
+            e questo, sinceramente, è assurdo.<br><br>
+
+            Soprattutto perché la queen sono io.
+        </div>
+
+        <button class="nextButton">→</button>
+
+    </section>
+
+
+    <!-- STEP 6 -->
+
+    <section class="screen photo-screen">
+
+        <img src="wanda-arrabbiata.jpg" alt="Wanda arrabbiata">
+
+        <div class="text-box">
+            E io mi arrabbio tantissimo…<br><br>
+
+            e glielo faccio sentire subito.
+        </div>
+
+        <button class="nextButton">→</button>
+
+    </section>
+
+
+    <!-- STEP 7 -->
+
+    <section class="screen photo-screen">
+
+        <img src="wanda-seria.jpg" alt="Wanda">
+
+        <div class="text-box">
+            Però posso dirti una cosa?<br><br>
+
+            Ci tiene davvero tanto a te…<br><br>
+
+            anche se a volte sbaglia.
+        </div>
+
+        <button class="nextButton">→</button>
+
+    </section>
+
+
+    <!-- STEP 8 -->
+
+    <section class="screen photo-screen">
+
+        <img src="wanda-con-lei.jpg" alt="Wanda con lei">
+
+        <div class="text-box">
+            Io certe cose le sento subito…<br><br>
+
+            e quando ci sei tu,<br><br>
+
+            si sta tutti un po’ meglio.
+        </div>
+
+        <button class="nextButton">→</button>
+
+    </section>
+
+
+    <!-- STEP 9 -->
+
+  <section class="screen photo-screen famiglia-screen">
+
+    <img src="wanda-famiglia.jpg" alt="Noi tre">
+
+    <div class="text-box famiglia-text">
+        Guardaci…<br><br>
+
+        questa è la mia famiglia.<br><br>
+
+        E io la voglio tutta insieme.<br><br>
+
+        Perché lui può sbagliare, può essere testardo…<br><br>
+
+        ma una cosa è certa: ti ama davvero.
+    </div>
+
+    <button class="nextButton">→</button>
+
+</section>
+
+    <!-- STEP 10 -->
+
+    <section class="screen photo-screen">
+
+        <img src="wanda-stretching.jpg" alt="Wanda stretching">
+
+        <div class="text-box">
+            E poi, a essere sinceri…<br><br>
+
+            mi servi anche per qualcosa di fondamentale:<br><br>
+
+            fare stretching come si deve.
+        </div>
+
+        <button class="nextButton">→</button>
+
+    </section>
+
+
+    <!-- STEP 11 -->
+
+    <section class="screen photo-screen">
+
+        <img src="wanda-dorme-finale.jpg" alt="Wanda che dorme">
+
+        <div class="text-box">
+            Direi che ho parlato abbastanza…<br><br>
+
+            ora tocca a voi due.<br><br>
+
+            Io torno a dormire.
+        </div>
+
+    </section>
+
+</main>
+
+<script src="script.js"></script>
 
 </body>
-
 </html>
